@@ -1,0 +1,77 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | North Star Bakery</title>
+</head>
+<body>
+
+    <header>
+        <h1>About North Star Bakery</h1>
+        <p>Freshly Baked, Made with Love</p>
+
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Our Products</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Our Story</h2>
+            <p>
+                At North Star Bakery, we believe that fresh
+                baked goods can bring people together.
+                Our goal is to create a welcoming place
+                where customers can enjoy delicious breads,
+                pastries, and cakes.
+            </p>
+            <p>
+                We value quality ingredients, friendly service,
+                and the simple joy of sharing freshly baked
+                treats with family and friends.
+            </p>
+        </section>
+
+        <section>
+            <h2>Our Mission</h2>
+            <p>
+                Our mission is to provide our community with
+                quality baked goods while creating a warm
+                and inviting experience for every customer.
+            </p>
+        </section>
+
+        <section>
+            <h2>What Makes Us Special</h2>
+            <ul>
+                <li>Freshly prepared baked goods</li>
+                <li>Quality ingredients</li>
+                <li>Friendly customer service</li>
+                <li>A welcoming neighborhood atmosphere</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Visit Our Bakery</h2>
+            <p>
+                Whether you're looking for your favorite
+                pastry or planning a special celebration,
+                we look forward to serving you.
+            </p>
+            <a href="contact.html">Get in Touch</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 North Star Bakery. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
