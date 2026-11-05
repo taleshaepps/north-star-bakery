@@ -83,12 +83,99 @@
                 availability and preorder options.
             </p>
             <a href="contact.html">Submit a Preorder Inquiry</a>
-        </section>
+   
+</section>
+        <section id="favorites-section">
+  <h2>My Favorite Bakery Items</h2>
+  <p>Select your favorite treats and save your choices for your next visit!</p>
+
+  <label for="bakery-item">Choose a bakery item:</label>
+  <select id="bakery-item">
+    <option value="">-- Select an item --</option>
+  </select>
+
+  <button type="button" id="save-favorite">Save Favorite</button>
+
+  <p id="favorite-message" role="status" aria-live="polite"></p>
+  <h3>Your Saved Favorites</h3>
+  <ul id="favorites-list"></ul>
+</section>
+     
     </main>
 
     <footer>
         <p>&copy; 2026 North Star Bakery. All rights reserved.</p>
     </footer>
+
+<script>
+  const bakeryItems = [
+    "Chocolate Cake",
+    "Vanilla Cupcakes",
+    "Fresh Bread",
+    "Cookies",
+    "Cinnamon Rolls"
+  ];
+
+  const itemSelect = document.getElementById("bakery-item");
+  const saveButton = document.getElementById("save-favorite");
+  const favoritesList = document.getElementById("favorites-list");
+  const message = document.getElementById("favorite-message");
+
+  function loadFavorites() {
+    try {
+      const saved = JSON.parse(localStorage.getItem("bakeryFavorites"));
+      return Array.isArray(saved) ? saved : [];
+    } catch {
+      return [];
+    }
+  }
+
+  let favorites = loadFavorites();
+
+  function displayItems() {
+    bakeryItems.forEach(function(item) {
+      const option = document.createElement("option");
+      option.value = item;
+      option.textContent = item;
+      itemSelect.appendChild(option);
+    });
+  }
+
+  function displayFavorites() {
+    favoritesList.innerHTML = "";
+
+    favorites.forEach(function(item) {
+      const li = document.createElement("li");
+      li.textContent = item;
+      favoritesList.appendChild(li);
+    });
+  }
+
+  function saveFavorite() {
+    const selectedItem = itemSelect.value;
+
+    if (!selectedItem) {
+      message.textContent = "Please select a bakery item.";
+      return;
+    }
+
+    if (favorites.includes(selectedItem)) {
+      message.textContent = "This item is already in your favorites.";
+      return;
+    }
+
+    favorites.push(selectedItem);
+    localStorage.setItem("bakeryFavorites", JSON.stringify(favorites));
+
+    displayFavorites();
+    message.textContent = selectedItem + " was added to your favorites!";
+  }
+
+  saveButton.addEventListener("click", saveFavorite);
+
+  displayItems();
+  displayFavorites();
+</script>
 
 </body>
 </html>
