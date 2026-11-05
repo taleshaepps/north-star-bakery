@@ -36,7 +36,7 @@
         <section>
             <h2>Preorder Inquiry Form</h2>
 
-            <form action="#" method="get">
+            <form id="contact-form" action="#" method="get" novalidate>
                 <fieldset>
                     <legend>Customer Information</legend>
 
@@ -132,6 +132,115 @@
     <footer>
         <p>&copy; 2026 North Star Bakery. All rights reserved.</p>
     </footer>
+
+<script>
+  const contactForm = document.getElementById("contact-form");
+
+  const validationFields = [
+    {
+      id: "customer-name",
+      message: "Please enter your full name (at least 2 characters)."
+    },
+    {
+      id: "customer-email",
+      message: "Please enter a valid email address."
+    }
+  ];
+
+  function showError(field, message) {
+    let error = document.getElementById(field.id + "-error");
+
+    if (!error) {
+      error = document.createElement("span");
+      error.id = field.id + "-error";
+      error.style.color = "red";
+      error.style.display = "block";
+      field.insertAdjacentElement("afterend", error);
+    }
+
+    error.textContent = message;
+    field.setAttribute("aria-invalid", "true");
+    field.setAttribute("aria-describedby", error.id);
+  }
+
+  function clearError(field) {
+    const error = document.getElementById(field.id + "-error");
+
+    if (error) {
+      error.textContent = "";
+    }
+
+    field.removeAttribute("aria-invalid");
+    field.removeAttribute("aria-describedby");
+  }
+
+  function validateField(fieldInfo) {
+    const field = document.getElementById(fieldInfo.id);
+    const value = field.value.trim();
+
+    let valid = true;
+
+    if (fieldInfo.id === "customer-name") {
+      valid = value.length >= 2;
+    }
+
+    if (fieldInfo.id === "customer-email") {
+      valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    }
+
+    if (!valid) {
+      showError(field, fieldInfo.message);
+    } else {
+      clearError(field);
+    }
+
+    return valid;
+  }
+
+  validationFields.forEach(function(fieldInfo) {
+    const field = document.getElementById(fieldInfo.id);
+
+    field.addEventListener("input", function() {
+      validateField(fieldInfo);
+    });
+  });
+
+  contactForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const results = validationFields.map(validateField);
+    const allValid = results.every(function(result) {
+      return result;
+    });
+
+    let status = document.getElementById("form-status");
+
+    if (!status) {
+      status = document.createElement("p");
+      status.id = "form-status";
+      status.setAttribute("role", "status");
+      contactForm.appendChild(status);
+    }
+
+    if (allValid) {
+      status.textContent =
+        "Your information is valid. This demonstration form does not send inquiries.";
+    } else {
+      status.textContent = "Please correct the highlighted fields.";
+    }
+  });
+
+  contactForm.addEventListener("reset", function() {
+    validationFields.forEach(function(fieldInfo) {
+      clearError(document.getElementById(fieldInfo.id));
+    });
+
+    const status = document.getElementById("form-status");
+    if (status) {
+      status.textContent = "";
+    }
+  });
+</script>
 
 </body>
 </html>
